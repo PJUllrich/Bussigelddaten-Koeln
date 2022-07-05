@@ -10,7 +10,7 @@ Mix.install([
 
 ```elixir
 path_to_data = "./Daten"
-years = ["2020"]
+years = ["2020", "2021"]
 
 for year <- years do
   path = "#{path_to_data}/#{year}"
