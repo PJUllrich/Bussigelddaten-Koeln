@@ -8,3 +8,20 @@ The data was downloaded here: [2020](https://www.offenedaten-koeln.de/dataset/bu
 The parking fine codes can be translated to useful names using the `tatbestandskatalog.pdf` [(Download link)](https://www.kba.de/DE/Themen/ZentraleRegister/FAER/BT_KAT_OWI/bkat_owi_09_11_2021.pdf;jsessionid=8FDF614EB006645B36151723681DA346.live21322?__blob=publicationFile&v=3).
 
 ## Scripts
+There are a few Bash and Elixir scripts in this repo. Here is what they do and how to use them:
+
+#### combine_files.sh
+This script combines all monthly datasets into a single `merged.csv` per year.
+
+You can run it by first making it executable with 
+
+```
+chmod 755 ./Scripts/combine_files.sh
+```
+
+and then running the script with:
+
+```
+cd Scripts
+./combine_files.sh
+```
