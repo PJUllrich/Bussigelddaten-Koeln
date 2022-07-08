@@ -10,8 +10,8 @@ The parking fine codes can be translated to useful names using the `tatbestandsk
 ## Scripts
 There are a few Bash and Elixir scripts in this repo. Here is what they do and how to use them:
 
-#### combine_files.sh
-This script combines all monthly datasets into a single `merged.csv` per year.
+### Combine all monthly datasets into a single file
+This script combines all monthly datasets into a single `Komplett_YEAR.csv` per year.
 
 You can run it by first making it executable with 
 
@@ -25,3 +25,25 @@ and then running the script with:
 cd Scripts
 ./combine_files.sh
 ```
+
+### Import Data into the Database
+You can easily import the data into a local Postgres database using `Mix.Tasks.ImportData`.
+
+First, set up the Phoenix application:
+
+```
+cd app
+mix deps.get
+mix ecto.setup
+```
+
+This will fetch the dependencies and set up a local `bussgelder_dev` database.
+
+Now, you can import the data with:
+
+```
+mix import_data ../Daten/2020/Komplett_2020.csv
+mix import_data ../Daten/2021/Komplett_2021.csv
+```
+
+This will import all data into the database and create indices for all columns.
