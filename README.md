@@ -29,7 +29,9 @@ cd Scripts
 ### Import Data into the Database
 You can easily import the data into a local Postgres database using `Mix.Tasks.ImportData`.
 
-First, set up the Phoenix application:
+First, make sure that you have a Postgres instance running and it is available at `http://localhost:5432`.
+
+Next, set up the Phoenix application:
 
 ```
 cd app
