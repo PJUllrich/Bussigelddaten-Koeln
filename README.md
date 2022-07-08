@@ -44,8 +44,14 @@ This will fetch the dependencies and set up a local `bussgelder_dev` database.
 Now, you can import the data with:
 
 ```
-mix import_data ../Daten/2020/Komplett_2020.csv
-mix import_data ../Daten/2021/Komplett_2021.csv
+mix import_data bussgelder ../Daten/2020/Komplett_2020.csv
+mix import_data bussgelder ../Daten/2021/Komplett_2021.csv
 ```
 
 This will import all data into the database and create indices for all columns.
+
+You can also import all locations with their latitude and longitude with:
+
+```
+mix import_data orte ../Daten/Alle-Orte-mit-Lat-Long.csv
+```

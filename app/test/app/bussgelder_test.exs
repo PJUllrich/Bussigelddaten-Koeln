@@ -72,4 +72,64 @@ defmodule App.BussgelderTest do
       assert %Ecto.Changeset{} = Bussgelder.change_bussgeld(bussgeld)
     end
   end
+
+  describe "orte" do
+    alias App.Bussgelder.Ort
+
+    import App.BussgelderFixtures
+
+    @invalid_attrs %{hausnummer: nil, latitude: nil, longitude: nil, strasse: nil}
+
+    test "list_orte/0 returns all orte" do
+      ort = ort_fixture()
+      assert Bussgelder.list_orte() == [ort]
+    end
+
+    test "get_ort!/1 returns the ort with given id" do
+      ort = ort_fixture()
+      assert Bussgelder.get_ort!(ort.id) == ort
+    end
+
+    test "create_ort/1 with valid data creates a ort" do
+      valid_attrs = %{hausnummer: "some hausnummer", latitude: 120.5, longitude: 120.5, strasse: "some strasse"}
+
+      assert {:ok, %Ort{} = ort} = Bussgelder.create_ort(valid_attrs)
+      assert ort.hausnummer == "some hausnummer"
+      assert ort.latitude == 120.5
+      assert ort.longitude == 120.5
+      assert ort.strasse == "some strasse"
+    end
+
+    test "create_ort/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Bussgelder.create_ort(@invalid_attrs)
+    end
+
+    test "update_ort/2 with valid data updates the ort" do
+      ort = ort_fixture()
+      update_attrs = %{hausnummer: "some updated hausnummer", latitude: 456.7, longitude: 456.7, strasse: "some updated strasse"}
+
+      assert {:ok, %Ort{} = ort} = Bussgelder.update_ort(ort, update_attrs)
+      assert ort.hausnummer == "some updated hausnummer"
+      assert ort.latitude == 456.7
+      assert ort.longitude == 456.7
+      assert ort.strasse == "some updated strasse"
+    end
+
+    test "update_ort/2 with invalid data returns error changeset" do
+      ort = ort_fixture()
+      assert {:error, %Ecto.Changeset{}} = Bussgelder.update_ort(ort, @invalid_attrs)
+      assert ort == Bussgelder.get_ort!(ort.id)
+    end
+
+    test "delete_ort/1 deletes the ort" do
+      ort = ort_fixture()
+      assert {:ok, %Ort{}} = Bussgelder.delete_ort(ort)
+      assert_raise Ecto.NoResultsError, fn -> Bussgelder.get_ort!(ort.id) end
+    end
+
+    test "change_ort/1 returns a ort changeset" do
+      ort = ort_fixture()
+      assert %Ecto.Changeset{} = Bussgelder.change_ort(ort)
+    end
+  end
 end

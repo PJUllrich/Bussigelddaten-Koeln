@@ -25,4 +25,21 @@ defmodule App.BussgelderFixtures do
 
     bussgeld
   end
+
+  @doc """
+  Generate a ort.
+  """
+  def ort_fixture(attrs \\ %{}) do
+    {:ok, ort} =
+      attrs
+      |> Enum.into(%{
+        hausnummer: "some hausnummer",
+        latitude: 120.5,
+        longitude: 120.5,
+        strasse: "some strasse"
+      })
+      |> App.Bussgelder.create_ort()
+
+    ort
+  end
 end

@@ -101,4 +101,100 @@ defmodule App.Bussgelder do
   def change_bussgeld(%Bussgeld{} = bussgeld, attrs \\ %{}) do
     Bussgeld.changeset(bussgeld, attrs)
   end
+
+  alias App.Bussgelder.Ort
+
+  @doc """
+  Returns the list of orte.
+
+  ## Examples
+
+      iex> list_orte()
+      [%Ort{}, ...]
+
+  """
+  def list_orte do
+    Repo.all(Ort)
+  end
+
+  @doc """
+  Gets a single ort.
+
+  Raises `Ecto.NoResultsError` if the Ort does not exist.
+
+  ## Examples
+
+      iex> get_ort!(123)
+      %Ort{}
+
+      iex> get_ort!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_ort!(id), do: Repo.get!(Ort, id)
+
+  @doc """
+  Creates a ort.
+
+  ## Examples
+
+      iex> create_ort(%{field: value})
+      {:ok, %Ort{}}
+
+      iex> create_ort(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_ort(attrs \\ %{}) do
+    %Ort{}
+    |> Ort.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a ort.
+
+  ## Examples
+
+      iex> update_ort(ort, %{field: new_value})
+      {:ok, %Ort{}}
+
+      iex> update_ort(ort, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_ort(%Ort{} = ort, attrs) do
+    ort
+    |> Ort.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a ort.
+
+  ## Examples
+
+      iex> delete_ort(ort)
+      {:ok, %Ort{}}
+
+      iex> delete_ort(ort)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_ort(%Ort{} = ort) do
+    Repo.delete(ort)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking ort changes.
+
+  ## Examples
+
+      iex> change_ort(ort)
+      %Ecto.Changeset{data: %Ort{}}
+
+  """
+  def change_ort(%Ort{} = ort, attrs \\ %{}) do
+    Ort.changeset(ort, attrs)
+  end
 end

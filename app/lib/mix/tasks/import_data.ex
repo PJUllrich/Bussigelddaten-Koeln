@@ -3,7 +3,21 @@ defmodule Mix.Tasks.ImportData do
 
   require Logger
 
-  def run(path) do
+  def run(["bussgelder", path]) do
+    command =
+      "COPY bussgelder(datum_von,kennzeichen,fahrzeugart,fabrikat,strasse,hausnummer,tatbestand_1,tatbestand_2,tatbestand_3) FROM STDIN CSV HEADER DELIMITER ';' "
+
+    do_import(command, path)
+  end
+
+  def run(["orte", path]) do
+    command =
+      "COPY orte(strasse,hausnummer,latitude,longitude) FROM STDIN CSV HEADER DELIMITER ';' "
+
+    do_import(command, path)
+  end
+
+  defp do_import(command, path) do
     Mix.Task.run("app.start", [])
 
     opts = App.Repo.config()
@@ -12,12 +26,7 @@ defmodule Mix.Tasks.ImportData do
     Postgrex.transaction(
       pid,
       fn conn ->
-        stream =
-          Postgrex.stream(
-            conn,
-            "COPY bussgelder(datum_von,kennzeichen,fahrzeugart,fabrikat,strasse,hausnummer,tatbestand_1,tatbestand_2,tatbestand_3) FROM STDIN CSV HEADER DELIMITER ';' ",
-            []
-          )
+        stream = Postgrex.stream(conn, command, [])
 
         Enum.into(File.stream!(path, [:trim_bom]), stream)
       end,
